@@ -1,0 +1,9 @@
+.search-char {
+	width: 200px;
+	margin: 20px auto;
+}
+.search-char input {
+	font-size: 20px;
+	padding: 10px;
+	text-align: center;
+}

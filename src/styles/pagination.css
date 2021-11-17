@@ -1,0 +1,37 @@
+.pagination-container {
+	width: 1280px;
+	margin: 40px auto;
+	display: flex;
+	justify-content: center;
+}
+.pagination {
+	width: 50%;
+	display: flex;
+	justify-content: space-around;
+}
+.page-nb {
+	display: flex;
+	gap: 10px;
+}
+
+.pagination-container button {
+	padding: 5px 10px;
+	font-family: inherit;
+	text-transform: uppercase;
+	font-weight: 700;
+	border: none;
+	border-bottom: 5px solid #fff;
+	border-top: 5px solid #fff;
+	background-color: transparent;
+	color: #fff;
+	cursor: pointer;
+}
+
+.page-nb button:first-child {
+	border-color: red;
+}
+.pagination-container .disabled {
+	color: #525252;
+	border-color: #525252;
+	cursor: auto;
+}
