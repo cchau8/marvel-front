@@ -27,7 +27,7 @@
 	cursor: pointer;
 }
 
-.page-nb button:first-child {
+.pagination-container .active {
 	border-color: red;
 }
 .pagination-container .disabled {

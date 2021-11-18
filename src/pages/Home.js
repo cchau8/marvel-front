@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
-// import Cookies from "js-cookie";
+import Fav from "../components/Fav";
 
-const Home = () => {
+const Home = ({ favChar, setFavChar }) => {
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState("");
@@ -32,24 +32,29 @@ const Home = () => {
 	return (
 		<main>
 			<h1>Characters</h1>
-			<Search setSearch={setSearch} />
+			<Search setSearch={setSearch} setPage={setPage} />
 			{isLoading ? (
 				<p>loading</p>
 			) : (
 				<div className="content-container">
 					{data.results.map((el, i) => {
 						return (
-							<div>
-								<Link to={`/characters/${el._id}`} key={el._id}>
+							<div key={el._id}>
+								<Link to={`/characters/${el._id}`}>
 									<div className="tile character">
 										<img
 											src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
 											alt={el.name}
 										/>
 										<h2>{el.name}</h2>
+										<Fav
+											item={el}
+											favState={favChar}
+											setFavState={setFavChar}
+											storageKey="favorites_characters"
+										/>
 									</div>
 								</Link>
-								{/* <button key={i}>FAV</button> */}
 							</div>
 						);
 					})}

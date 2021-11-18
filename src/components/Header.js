@@ -12,7 +12,11 @@ export const Header = () => {
 					<Link to="/comics">Comics</Link>
 				</nav>
 				<img src={logo} alt="marvel-logo" />
-				<nav>{/* insérer les links/button pour les favorsi et signup/login */}</nav>
+				<nav>
+					{/* insérer les links/button pour les favorsi et signup/login */}
+					<Link to="/favorites">Favorites</Link>
+					<Link to="/">Login</Link>
+				</nav>
 			</div>
 		</header>
 	);

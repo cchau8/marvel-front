@@ -1,6 +1,19 @@
 import "../styles/pagination.css";
 
 const Pagination = ({ setPage, page, count }) => {
+	const nbOfPages = Math.floor(count / 100) + 1;
+	const fivePages =
+		nbOfPages > 5
+			? Array.from(Array(5), (e, i) => {
+					if (page < nbOfPages - 4) {
+						return page + i;
+					} else {
+						return nbOfPages - 4 + i;
+					}
+			  })
+			: Array.from(Array(nbOfPages), (e, i) => {
+					return page + i;
+			  });
 	return (
 		<div className="pagination-container">
 			<div className="pagination">
@@ -21,33 +34,32 @@ const Pagination = ({ setPage, page, count }) => {
 					previous
 				</button>
 				<div className="page-nb">
-					{Array.from(Array(Math.floor(count / 100) + 1), (e, i) => i + 1).map(
-						(el, i) => {
-							return (
-								el >= page &&
-								el <= page + 4 && (
-									<button key={i} onClick={() => setPage(el)}>
-										{el}
-									</button>
-								)
-							);
-						}
-					)}
+					{fivePages.map((el, i) => {
+						return (
+							<button
+								className={page === el ? "active" : ""}
+								onClick={() => setPage(el)}
+								key={i}
+							>
+								{el}
+							</button>
+						);
+					})}
 				</div>
 
 				<button
 					onClick={() => {
-						page < Math.floor(count / 100) + 1 && setPage(page + 1);
+						page < nbOfPages && setPage(page + 1);
 					}}
-					className={page === Math.floor(count / 100) + 1 ? "disabled" : ""}
+					className={page === nbOfPages ? "disabled" : ""}
 				>
 					next
 				</button>
 				<button
 					onClick={() => {
-						page < Math.floor(count / 100) + 1 && setPage(Math.floor(count / 100) + 1);
+						page < nbOfPages && setPage(nbOfPages);
 					}}
-					className={page === Math.floor(count / 100) + 1 ? "disabled" : ""}
+					className={page === nbOfPages ? "disabled" : ""}
 				>
 					last
 				</button>

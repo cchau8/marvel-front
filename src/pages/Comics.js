@@ -3,8 +3,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Pagination from "../components/Pagination";
 import Search from "../components/Search";
+import Fav from "../components/Fav";
 
-const Comics = () => {
+const Comics = ({ favComics, setFavComics }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState();
 	const [search, setSearch] = useState("");
@@ -26,6 +27,27 @@ const Comics = () => {
 		});
 	}, [search, page]);
 
+	const checkFav = (id) => {
+		if (favComics.includes(id)) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	const handleFav = (e, item) => {
+		e.preventDefault();
+		const favs = [...favComics];
+		if (!favs.some((el) => el._id === item._id)) {
+			favs.push(item);
+			setFavComics(favs);
+			localStorage.setItem("favorites_comics", JSON.stringify(favs));
+		} else {
+			const filtered = favs.filter((el) => el._id !== item._id);
+			setFavComics(filtered);
+			localStorage.setItem("favorites_comics", filtered);
+		}
+	};
 	return (
 		<main>
 			<h1>Comics</h1>
@@ -50,6 +72,12 @@ const Comics = () => {
 												.replaceAll("<br>", "")
 										: ""}
 								</p>
+								<Fav
+									item={el}
+									favState={favComics}
+									setFavState={setFavComics}
+									storageKey="favorites_comics"
+								/>
 							</div>
 						);
 					})}
