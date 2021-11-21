@@ -11,11 +11,14 @@ const Signup = () => {
 		e.preventDefault();
 		try {
 			if (email && username && password) {
-				const response = await axios.post(`${process.env.API_URL}/user/signup`, {
-					username: username,
-					email: email,
-					password: password,
-				});
+				const response = await axios.post(
+					`https://marvel-backend-cchau.herokuapp.com/user/signup`,
+					{
+						username: username,
+						email: email,
+						password: password,
+					}
+				);
 				console.log(response.data);
 			}
 		} catch (error) {

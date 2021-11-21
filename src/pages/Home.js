@@ -20,7 +20,7 @@ const Home = ({ favChar, setFavChar }) => {
 			const searchInput = search !== "" ? `&name=${search}` : "";
 			const skipPage = `&skip=${page * 100 - 100}`;
 			const response = await axios.get(
-				`${process.env.API_URL}/characters?${searchInput}${skipPage}`
+				`https://marvel-backend-cchau.herokuapp.com/characters?${searchInput}${skipPage}`
 			);
 			setData(response.data);
 			setIsLoading(false);

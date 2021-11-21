@@ -1,4 +1,3 @@
-require("dotenv").config();
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
@@ -7,9 +6,8 @@ import Comics from "./pages/Comics";
 import CharacterPage from "./pages/CharacterPage";
 import { useState } from "react";
 import Favorites from "./pages/Favorites";
+import Signup from "./pages/Signup";
 import Cookies from "js-cookie";
-
-// import de fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
 	faStar,
@@ -20,7 +18,8 @@ import {
 	faAngleRight,
 	faAngleDoubleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import Signup from "./pages/Signup";
+require("dotenv").config();
+
 library.add(
 	faStar,
 	faTimes,

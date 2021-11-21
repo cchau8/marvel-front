@@ -30,7 +30,9 @@ const CharacterPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get(`${process.env.API_URL}/comics/${characterId}`);
+			const response = await axios.get(
+				`https://marvel-backend-cchau.herokuapp.com/comics/${characterId}`
+			);
 			setData(response.data);
 			setIsLoading(false);
 		};
