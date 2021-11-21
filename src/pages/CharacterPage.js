@@ -30,7 +30,7 @@ const CharacterPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get(`http://localhost:4000/comics/${characterId}`);
+			const response = await axios.get(`${process.env.API_URL}/comics/${characterId}`);
 			setData(response.data);
 			setIsLoading(false);
 		};

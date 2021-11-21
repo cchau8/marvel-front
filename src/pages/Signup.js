@@ -11,7 +11,7 @@ const Signup = () => {
 		e.preventDefault();
 		try {
 			if (email && username && password) {
-				const response = await axios.post("http://localhost:4000/user/signup", {
+				const response = await axios.post(`${process.env.API_URL}/user/signup`, {
 					username: username,
 					email: email,
 					password: password,

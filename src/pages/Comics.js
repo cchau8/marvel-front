@@ -19,7 +19,7 @@ const Comics = ({ favComics, setFavComics }) => {
 			const searchInput = search !== "" ? `&title=${search}` : "";
 			const skipPage = `&skip=${page * 100 - 100}`;
 			const response = await axios.get(
-				`http://localhost:4000/comics?${searchInput}${skipPage}`
+				`${process.env.API_URL}/comics?${searchInput}${skipPage}`
 			);
 			setData(response.data);
 			setIsLoading(false);

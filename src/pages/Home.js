@@ -20,7 +20,7 @@ const Home = ({ favChar, setFavChar }) => {
 			const searchInput = search !== "" ? `&name=${search}` : "";
 			const skipPage = `&skip=${page * 100 - 100}`;
 			const response = await axios.get(
-				`http://localhost:4000/characters?${searchInput}${skipPage}`
+				`${process.env.API_URL}/characters?${searchInput}${skipPage}`
 			);
 			setData(response.data);
 			setIsLoading(false);
