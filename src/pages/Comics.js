@@ -3,13 +3,17 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Pagination from "../components/Pagination";
 import Search from "../components/Search";
-import Fav from "../components/Fav";
+import Loading from "../components/Loading";
+import NotFound from "../components/NotFound";
+import Hero from "../components/Hero";
+import ComicTile from "../components/ComicTile";
 
 const Comics = ({ favComics, setFavComics }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState();
 	const [search, setSearch] = useState("");
 	const [page, setPage] = useState(1);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const searchInput = search !== "" ? `&title=${search}` : "";
@@ -27,64 +31,41 @@ const Comics = ({ favComics, setFavComics }) => {
 		});
 	}, [search, page]);
 
-	const checkFav = (id) => {
-		if (favComics.includes(id)) {
-			return true;
-		} else {
-			return false;
-		}
-	};
-
-	const handleFav = (e, item) => {
-		e.preventDefault();
-		const favs = [...favComics];
-		if (!favs.some((el) => el._id === item._id)) {
-			favs.push(item);
-			setFavComics(favs);
-			localStorage.setItem("favorites_comics", JSON.stringify(favs));
-		} else {
-			const filtered = favs.filter((el) => el._id !== item._id);
-			setFavComics(filtered);
-			localStorage.setItem("favorites_comics", filtered);
-		}
-	};
 	return (
-		<main>
-			<h1>Comics</h1>
-			<Search setSearch={setSearch} />
-			{isLoading ? (
-				<p>loading</p>
-			) : (
-				<div className="content-container">
-					{data.results.map((el, i) => {
-						return (
-							<div className="tile comic" key={el._id}>
-								<img
-									src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
-									alt={el.title}
-								/>
-								<h2>{el.title}</h2>
-								<p>
-									{el.description
-										? el.description
-												.replaceAll("&#39;", "'")
-												.replaceAll("&ndash;", "-")
-												.replaceAll("<br>", "")
-										: ""}
-								</p>
-								<Fav
-									item={el}
-									favState={favComics}
-									setFavState={setFavComics}
-									storageKey="favorites_comics"
-								/>
-							</div>
-						);
-					})}
-					<Pagination setPage={setPage} page={page} count={data.count} />
-				</div>
-			)}
-		</main>
+		<>
+			<Hero title="Comics" />
+			<main>
+				<Search
+					setSearch={setSearch}
+					setPage={setPage}
+					isLoading={isLoading}
+					data={data}
+					search={search}
+				/>
+				{isLoading ? (
+					<Loading />
+				) : data.count === 0 ? (
+					<NotFound />
+				) : (
+					<>
+						<div className="content-container">
+							<Pagination setPage={setPage} page={page} count={data.count} />
+
+							{data.results.map((el, i) => {
+								return (
+									<ComicTile
+										favComics={favComics}
+										setFavComics={setFavComics}
+										item={el}
+									/>
+								);
+							})}
+							<Pagination setPage={setPage} page={page} count={data.count} />
+						</div>
+					</>
+				)}
+			</main>
+		</>
 	);
 };
 

@@ -1,4 +1,5 @@
 import "../styles/pagination.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Pagination = ({ setPage, page, count }) => {
 	const nbOfPages = Math.floor(count / 100) + 1;
@@ -23,7 +24,7 @@ const Pagination = ({ setPage, page, count }) => {
 					}}
 					className={page === 1 ? "disabled" : ""}
 				>
-					first
+					<FontAwesomeIcon icon="angle-double-left" />
 				</button>
 				<button
 					onClick={() => {
@@ -31,7 +32,7 @@ const Pagination = ({ setPage, page, count }) => {
 					}}
 					className={page === 1 ? "disabled" : ""}
 				>
-					previous
+					<FontAwesomeIcon icon="angle-left" />
 				</button>
 				<div className="page-nb">
 					{fivePages.map((el, i) => {
@@ -53,7 +54,7 @@ const Pagination = ({ setPage, page, count }) => {
 					}}
 					className={page === nbOfPages ? "disabled" : ""}
 				>
-					next
+					<FontAwesomeIcon icon="angle-right" />
 				</button>
 				<button
 					onClick={() => {
@@ -61,7 +62,7 @@ const Pagination = ({ setPage, page, count }) => {
 					}}
 					className={page === nbOfPages ? "disabled" : ""}
 				>
-					last
+					<FontAwesomeIcon icon="angle-double-right" />
 				</button>
 			</div>
 		</div>

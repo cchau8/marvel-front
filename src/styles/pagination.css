@@ -5,7 +5,7 @@
 	justify-content: center;
 }
 .pagination {
-	width: 50%;
+	width: 35%;
 	display: flex;
 	justify-content: space-around;
 }
@@ -20,18 +20,23 @@
 	text-transform: uppercase;
 	font-weight: 700;
 	border: none;
-	border-bottom: 5px solid #fff;
-	border-top: 5px solid #fff;
+	/* border-radius: 10px;
+	border-bottom: 5px solid var(--dark);
+	border-top: 3px solid var(--dark); */
 	background-color: transparent;
-	color: #fff;
+	color: var(--dark);
 	cursor: pointer;
+	color: var(--dark);
+	font-size: 18px;
 }
 
 .pagination-container .active {
-	border-color: red;
+	background-color: rgb(235, 24, 24);
+	color: #fff;
+	border-radius: 3px;
 }
 .pagination-container .disabled {
-	color: #525252;
-	border-color: #525252;
+	color: #c5c5c5;
+	border-color: #b3b3b3;
 	cursor: auto;
 }

@@ -2,6 +2,27 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/character-page.css";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import Loading from "../components/Loading";
+
+const responsive = {
+	desktop: {
+		breakpoint: { max: 3000, min: 1024 },
+		items: 4,
+		slidesToSlide: 4, // optional, default to 1.
+	},
+	tablet: {
+		breakpoint: { max: 1024, min: 464 },
+		items: 2,
+		slidesToSlide: 2, // optional, default to 1.
+	},
+	mobile: {
+		breakpoint: { max: 464, min: 0 },
+		items: 1,
+		slidesToSlide: 1, // optional, default to 1.
+	},
+};
 
 const CharacterPage = () => {
 	const { characterId } = useParams();
@@ -17,11 +38,11 @@ const CharacterPage = () => {
 	}, [characterId]);
 
 	return (
-		<main>
+		<div className="character-page">
 			{isLoading ? (
-				<p>loading</p>
+				<Loading />
 			) : (
-				<div className="character-page">
+				<div className="character-content">
 					<div className="char-main">
 						<img
 							src={`${data.thumbnail.path}.${data.thumbnail.extension}`}
@@ -32,32 +53,24 @@ const CharacterPage = () => {
 							<p>{data.description}</p>
 						</div>
 					</div>
-					<h2 className="comics-title">{data.name} Comics</h2>
-					<div className="char-comics">
+					<h4>{data.name} Comics</h4>
+
+					<Carousel responsive={responsive} itemClass="comic-tile">
 						{data.comics.map((el, i) => {
 							return (
-								<div key={el._id} className="comic-tile">
+								<div key={el._id}>
 									<img
 										src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
 										alt={el.title}
 									/>
-									<div>
-										<h3>{el.title}</h3>
-										{/* <p>
-											{el.description
-												? el.description
-														.replaceAll("&#39;", "'")
-														.replaceAll("&ndash;", "-")
-												: ""}
-										</p> */}
-									</div>
+									<h5>{el.title}</h5>
 								</div>
 							);
 						})}
-					</div>
+					</Carousel>
 				</div>
 			)}
-		</main>
+		</div>
 	);
 };
 

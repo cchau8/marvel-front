@@ -1,30 +1,70 @@
 header {
 	background-color: var(--dark);
 	border-bottom: 1px solid rgba(128, 128, 128, 0.329);
-	margin-bottom: 50px;
+	/* margin-bottom: 50px; */
 	width: 100%;
 	display: flex;
 	font-family: var(--roboto-condensed);
 	font-weight: 700;
-	font-size: 20px;
+	font-size: 10px;
 	justify-content: center;
+	text-transform: uppercase;
 }
 .nav-container {
-	width: 50%;
+	width: 60%;
 	display: flex;
 	justify-content: space-around;
 }
 nav {
-	width: 30%;
+	width: 50%;
 	display: flex;
 	align-self: center;
 	justify-content: space-around;
 }
 header img {
 	width: 200px;
+	margin: 0 20px;
 }
 header nav a {
 	color: #fff;
 	text-decoration: none;
 	font-size: 24px;
+	transition: ease-in 0.1s;
+	padding: 10px 0;
+	position: relative;
+	cursor: pointer;
+}
+header a:after {
+	content: "";
+	height: 3px;
+	width: 0;
+	/* font-size: 8px; */
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: block;
+	background-color: #fff;
+}
+nav a:hover::after {
+	width: 100%;
+	transition: ease-in-out 0.3s;
+}
+header button,
+.connected {
+	color: #fff;
+	text-decoration: none;
+	font-size: 24px;
+	transition: ease-in 0.1s;
+
+	position: relative;
+	cursor: pointer;
+	background: none;
+	border: none;
+	font-family: inherit;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+.connected {
+	position: relative;
+	top: 10px;
 }

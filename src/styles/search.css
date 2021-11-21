@@ -1,9 +1,40 @@
 .search-char {
 	width: 200px;
-	margin: 20px auto;
+	font-size: 20px;
+	margin: 10px auto 20px auto;
+	border-bottom: 2px solid var(--dark);
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+.search-i {
+	color: #454545;
 }
 .search-char input {
-	font-size: 20px;
 	padding: 10px;
-	text-align: center;
+	font-size: inherit;
+	border: none;
+	outline: none;
+	text-transform: uppercase;
+	font-family: var(--roboto-condensed);
+	font-weight: 700;
+}
+.auto-complete {
+	height: 200px;
+	overflow: hidden;
+	position: absolute;
+	background-color: #fff;
+	top: 100%;
+	z-index: 99;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+.auto-complete div {
+	border: 1px solid black;
+	height: 30px;
+	padding: 5px;
+	box-sizing: border-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

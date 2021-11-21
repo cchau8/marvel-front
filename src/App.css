@@ -4,54 +4,133 @@
 	--roboto-condensed: "Roboto Condensed", sans-serif;
 	--dark: #202020;
 }
+* {
+	box-sizing: border-box;
+}
 body {
 	font-family: var(--roboto);
-	background-color: var(--dark);
+	background-color: #fff;
 }
 a {
 	text-decoration: none;
+	color: inherit;
+	display: block;
 }
 main {
 	width: 1280px;
-	margin: 0 auto;
-	margin-bottom: 200px;
+	margin: 0 auto 50px auto;
 }
 h1 {
 	font-family: var(--roboto-condensed);
 	font-size: 32px;
 	font-weight: 700;
-	color: #fff;
+	color: var(--dark);
 }
 
 h2 {
 	font-family: var(--roboto-condensed);
 	font-size: 18px;
-	padding: 10px 0;
+	padding: 20px;
 	font-weight: 700;
+	position: absolute;
+	z-index: 12;
+	max-height: 75px;
+	overflow: hidden;
+}
+.not-found {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: center;
+}
+.not-found h2 {
+	position: inherit;
+	margin-top: 200px;
+	font-size: 38px;
 }
 .content-container {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 20px;
+	gap: 15px;
 }
 .tile {
-	width: 300px;
-	height: 350px;
+	width: 240px;
+	height: 380px;
 	color: #fff;
 	position: relative;
+	transition: ease-in-out 0.15s;
+	background-color: var(--dark);
+	overflow: hidden;
+	z-index: 2;
+}
+
+.tile-text {
+	height: 80px;
+	z-index: 3;
+	position: relative;
+	top: 300px;
+	overflow: hidden;
+}
+.tile-text::before {
+	content: "";
+	z-index: inherit;
+	display: block;
+	width: 100%;
+	height: 80px;
+	background-color: rgb(197, 0, 0);
+	position: absolute;
+	top: -80px;
+	left: 0px;
+	transition: ease-in-out 0.3s;
+}
+.tile:hover .tile-text::before {
+	transform: translateY(100%);
+	transition: ease-in-out 0.3s;
 }
 .tile button {
 	position: absolute;
 	top: 0;
 	right: 0;
 }
+.tile:after {
+	content: "";
+	color: #fff;
+	background-color: #fff;
+	display: block;
+	position: absolute;
+	bottom: -10px;
+	right: -10px;
+	z-index: 5;
+	width: 20px;
+	height: 20px;
+	transform: rotate(45deg);
+}
+
 .tile img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: ease-in-out 0.3s;
+	z-index: 30;
+}
+.img-container {
 	width: 300px;
 	height: 300px;
-	object-fit: cover;
+	position: absolute;
+	overflow: hidden;
+	border-bottom: 5px solid rgb(200, 0, 0);
 }
+
+.tile:hover img {
+	transform: scale(1.05);
+	transition: ease-in-out 0.2s;
+}
+
 .comic {
 	height: 500px;
+}
+.comic .tile-text {
+	height: 175px;
 }
 .comic p {
 	display: -webkit-box;
@@ -59,6 +138,12 @@ h2 {
 	overflow: hidden;
 	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
+	position: absolute;
+	top: 75px;
+	z-index: 4;
+	color: white;
+	padding: 10px;
+	line-height: 18px;
 }
 .fav-btn {
 	position: absolute;
@@ -70,7 +155,8 @@ h2 {
 	cursor: pointer;
 }
 .not-fav:hover {
-	color: #d4af08;
+	color: red;
+	/* color: #d4af08; */
 	transition: 0.1s ease-in;
 	transform: scale(1.2);
 }
@@ -79,4 +165,12 @@ h2 {
 }
 .favorited:hover {
 	transform: scale(0.8);
+}
+
+.loading {
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	width: 300px;
+	overflow: hidden;
 }

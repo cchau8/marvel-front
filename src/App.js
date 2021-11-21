@@ -6,27 +6,55 @@ import Comics from "./pages/Comics";
 import CharacterPage from "./pages/CharacterPage";
 import { useState } from "react";
 import Favorites from "./pages/Favorites";
+import Cookies from "js-cookie";
 
 // import de fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
-library.add(faStar, faTimes);
+import {
+	faStar,
+	faTimes,
+	faSearch,
+	faAngleLeft,
+	faAngleDoubleLeft,
+	faAngleRight,
+	faAngleDoubleRight,
+} from "@fortawesome/free-solid-svg-icons";
+import Signup from "./pages/Signup";
+library.add(
+	faStar,
+	faTimes,
+	faSearch,
+	faAngleLeft,
+	faAngleDoubleLeft,
+	faAngleRight,
+	faAngleDoubleRight
+);
 
 function App() {
 	const [favChar, setFavChar] = useState(
 		localStorage.getItem("favorites_characters")
-			? localStorage.getItem("favorites_characters").split(",")
+			? JSON.parse(localStorage.getItem("favorites_characters"))
 			: []
 	);
 	const [favComics, setFavComics] = useState(
 		localStorage.getItem("favorites_comics")
-			? localStorage.getItem("favorites_comics").split(",")
+			? JSON.parse(localStorage.getItem("favorites_comics"))
 			: []
 	);
+	const [token, setToken] = useState(Cookies.get("token" || ""));
+
+	const setUser = (token) => {
+		if (token) {
+			Cookies.set("token", token);
+		} else {
+			Cookies.remove("token");
+		}
+		setToken(token);
+	};
 
 	return (
 		<Router>
-			<Header />
+			<Header setUser={setUser} token={token} />
 
 			<Routes>
 				<Route path="/" element={<Home favChar={favChar} setFavChar={setFavChar} />} />
@@ -46,6 +74,7 @@ function App() {
 						/>
 					}
 				/>
+				<Route path="/signup" element={<Signup />} />
 			</Routes>
 		</Router>
 	);

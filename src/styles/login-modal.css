@@ -1,0 +1,44 @@
+.modal {
+	position: absolute;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	background-color: rgba(20, 20, 20, 0.726);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.modal-content {
+	width: 30%;
+	height: fit-content;
+	padding: 40px;
+	border-radius: 10px;
+	background-color: rgb(255, 255, 255);
+	position: relative;
+}
+.modal-content h1 {
+	color: rgb(0, 0, 0);
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 38px;
+}
+.modal-content form {
+	width: 100%;
+}
+.modal button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: none;
+	border: none;
+	font-size: 28px;
+}
+.modal a {
+	margin-top: 10px;
+}
+.modal a:hover {
+	text-decoration: underline;
+}

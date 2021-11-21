@@ -1,10 +1,17 @@
 .fav-page h2 {
 	font-size: 32px;
-	color: #fff;
+	color: #000;
+	position: relative;
 }
 .fav-page h1 {
 	font-size: 38px;
 	margin-bottom: 40px;
+}
+.fav-page h3 {
+	color: #000;
+}
+.fav-page {
+	margin-top: 50px;
 }
 .fav-container {
 	display: flex;
@@ -18,9 +25,10 @@
 }
 .fav-tile {
 	width: 300px;
-	height: 500px;
+	height: 400px;
 	color: #fff;
 	position: relative;
+	overflow-y: visible;
 }
 .fav-tile img {
 	width: 300px;
@@ -42,7 +50,7 @@
 	color: rgb(255, 193, 182);
 }
 .fav-page p {
-	color: #fff;
+	color: #000;
 	padding: 20px 0;
 	font-size: 20px;
 }
