@@ -1,15 +1,31 @@
 import "../styles/search.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 const Search = ({ setSearch, setPage, data, search, isLoading }) => {
 	const [searchResult, setSearchResult] = useState({ results: [] });
-
+	const [showResult, setShowResult] = useState(false);
 	const handleChange = (e) => {
 		setSearch(e.target.value);
 		setPage(1);
 		setSearchResult({ ...data });
+		setShowResult(true);
 	};
+	const searchRef = useRef();
+	// Detect click outside the modal
+	useEffect(() => {
+		const handler = (e) => {
+			if (showResult && !searchRef.current?.contains(e.target)) {
+				setShowResult(false);
+				const body = document.querySelector("body");
+				body.style.overflow = "auto";
+			}
+		};
+		window.addEventListener("click", handler);
+		return () => {
+			window.removeEventListener("click", handler);
+		};
+	}, [showResult, setShowResult]);
 	return (
 		<div className="search-char">
 			<FontAwesomeIcon icon="search" className="search-i" />
@@ -19,8 +35,8 @@ const Search = ({ setSearch, setPage, data, search, isLoading }) => {
 				placeholder="search"
 				onChange={handleChange}
 			/>
-			{!isLoading && (
-				<div className="auto-complete">
+			{!isLoading && showResult && (
+				<div className="auto-complete" ref={searchRef}>
 					{search !== "" &&
 						searchResult.results.map((el) => {
 							return el.name

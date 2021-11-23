@@ -20,7 +20,7 @@
 	font-weight: 700;
 }
 .auto-complete {
-	height: 200px;
+	max-height: 200px;
 	overflow: hidden;
 	position: absolute;
 	background-color: #fff;
@@ -28,8 +28,12 @@
 	z-index: 99;
 	font-size: 16px;
 	text-transform: uppercase;
+	overflow-y: scroll;
 }
-.auto-complete div {
+.auto-complete::-webkit-scrollbar {
+	display: none;
+}
+.auto-complete a {
 	border: 1px solid black;
 	height: 30px;
 	padding: 5px;
@@ -37,4 +41,9 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	font-family: inherit;
+}
+.auto-complete a:hover {
+	color: #fff;
+	background-color: #333;
 }
